@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доставка пиццы • Соусы</title>
+    <link rel="icon" type="image/svg" href="/pizza-slice-solid.svg">
+    <script src="https://kit.fontawesome.com/deaee54991.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Доставка пиццы в Перми</h1>
+<header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/"><i class="fa-solid fa-pizza-slice" style="color: #fbca18;"></i></a></li>
+            <li><a href="/pizzas">Пицца</a></li>
+            <li><a href="/sauces">Соусы</a></li>
+            <li><a href="/juices">Напитки</a></li>
+            <li><a href="/reviews">Отзывы</a></li>
+            <li><a href="/contacts">Контакты</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div>
+        <h1>Выберите соус</h1>
+        <div th:each="sauce : ${sauces}" class="card">
+            <img th:src="${sauce.imageUrl}" th:alt="${sauce.name}" width="150">
+            <h4 th:text="${sauce.name}">Название соуса</h4>
+            <p class="price">Цена: <span th:text="${sauce.basePrice}">0</span> руб.</p>
+            <button class="order-btn">Добавить в корзину</button>
+        </div>
+    </div>
+</main>
+<footer>
+    Доставка по всей Перми.<br>
+    &copy; Ермишин Данил 2023<br>
+    <a href="mailto:danichPerm2016@mail.ru">danichPerm2016@mail.ru</a>
+</footer>
+</body>
+</html>

@@ -19,6 +19,10 @@
             <li><a href="/juices">Напитки</a></li>
             <li><a href="/reviews">Отзывы</a></li>
             <li><a href="/contacts">Контакты</a></li>
+            <li><a href="/cart" class="cart-link">
+                <i class="fa-solid fa-cart-shopping"></i> Корзина
+                <span th:if="${cart != null and cart.totalItems > 0}" class="cart-count" th:text="${cart.totalItems}">0</span>
+            </a></li>
         </ul>
     </nav>
 </header>
@@ -28,14 +32,19 @@
         <div th:each="drink : ${drinks}" class="card">
             <img th:src="${drink.imageUrl}" th:alt="${drink.name}" width="200">
             <h4 th:text="${drink.name}">Название напитка</h4>
+            <p th:text="${drink.description}">Описание напитка</p>
             <p class="price">Цена: <span th:text="${drink.basePrice}">0</span> руб.</p>
-            <button class="order-btn">Добавить в корзину</button>
+            <form th:action="@{/cart/add}" method="post" style="display: inline;">
+                <input type="hidden" name="productId" th:value="${drink.id}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="order-btn">В корзину</button>
+            </form>
         </div>
     </div>
 </main>
 <footer>
     Доставка по всей Перми.<br>
-    &copy; Ермишин Данил 2023<br>
+    &copy; dmkcompany 2025<br>
     <a href="mailto:danichPerm2016@mail.ru">danichPerm2016@mail.ru</a>
 </footer>
 </body>

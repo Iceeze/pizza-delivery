@@ -19,6 +19,10 @@
                 <li><a href="/juices">Напитки</a></li>
                 <li><a href="/reviews">Отзывы</a></li>
                 <li><a href="/contacts">Контакты</a></li>
+                <li><a href="/cart" class="cart-link">
+                    <i class="fa-solid fa-cart-shopping"></i> Корзина
+                    <span th:if="${cart != null and cart.totalItems > 0}" class="cart-count" th:text="${cart.totalItems}">0</span>
+                </a></li>
             </ul>
         </nav>
     </header>
@@ -39,7 +43,7 @@
     </main>
     <footer>
         Доставка по всей Перми.<br>
-        &copy; Ермишин Данил 2023<br>
+        &copy; dmkcompany 2025<br>
         <a href="mailto:danichPerm2016@mail.ru">danichPerm2016@mail.ru</a>
     </footer>
 </body>

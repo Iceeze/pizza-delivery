@@ -19,6 +19,10 @@
                 <li><a href="/juices">Напитки</a></li>
                 <li><a href="/reviews">Отзывы</a></li>
                 <li><a href="/contacts">Контакты</a></li>
+                <li><a href="/cart" class="cart-link">
+                    <i class="fa-solid fa-cart-shopping"></i> Корзина
+                    <span th:if="${cart != null and cart.totalItems > 0}" class="cart-count" th:text="${cart.totalItems}">0</span>
+                </a></li>
             </ul>
         </nav>
     </header>
@@ -27,9 +31,9 @@
         <div class="phones">
             <h3>Телефоны:</h3>
             <ul>
-                <li><code>+7(992)204-63-67</code></li>
-                <li><code>+7(992)214-73-76</code></li>
-                <li><code>+7(902)639-75-03</code></li>
+                <li><code>+7(992)204-03-03</code></li>
+                <li><code>+7(992)214-75-75</code></li>
+                <li><code>+7(902)639-05-05</code></li>
             </ul>
         </div>
         <div class="social">
@@ -46,7 +50,7 @@
     </main>
     <footer>
         Доставка по всей Перми.<br>
-        &copy; Ермишин Данил 2023<br>
+        &copy; dmkcompany 2025<br>
         <a href="mailto:danichPerm2016@mail.ru">danichPerm2016@mail.ru</a>
     </footer>
 </body>

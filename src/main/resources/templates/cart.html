@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Доставка пиццы • Корзина</title>
+  <link rel="icon" type="image/svg" href="/pizza-slice-solid.svg">
+  <script src="https://kit.fontawesome.com/deaee54991.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Доставка пиццы в Перми</h1>
+<header>
+  <nav class="navbar">
+    <ul>
+      <li><a href="/"><i class="fa-solid fa-pizza-slice" style="color: #fbca18;"></i></a></li>
+      <li><a href="/pizzas">Пицца</a></li>
+      <li><a href="/sauces">Соусы</a></li>
+      <li><a href="/juices">Напитки</a></li>
+      <li><a href="/reviews">Отзывы</a></li>
+      <li><a href="/contacts">Контакты</a></li>
+      <li><a href="/cart" class="cart-link">
+        <i class="fa-solid fa-cart-shopping"></i> Корзина
+        <span th:if="${cart != null and cart.totalItems > 0}" class="cart-count" th:text="${cart.totalItems}">0</span>
+      </a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <div class="cart-container">
+    <h1>Корзина покупок</h1>
+
+    <div th:if="${cart?.items?.empty}">
+      <p>Ваша корзина пуста</p>
+      <a href="/pizzas" class="order-btn">Перейти к выбору пиццы</a>
+    </div>
+
+    <div th:if="${cart != null and not cart.items.empty}">
+      <!-- Список товаров -->
+      <div class="cart-items">
+        <div th:each="item : ${cart.items}" class="cart-item">
+          <img th:src="${item.imageUrl}" th:alt="${item.productName}" width="100">
+          <div class="item-details">
+            <h4 th:text="${item.productName}">Название товара</h4>
+            <p class="price" th:text="${item.price} + ' руб.'">Цена</p>
+          </div>
+          <div class="quantity-controls">
+            <form th:action="@{/cart/update}" method="post" class="quantity-form">
+              <input type="hidden" name="productId" th:value="${item.productId}">
+              <button type="submit" name="quantity" th:value="${item.quantity - 1}"
+                      th:disabled="${item.quantity <= 1}" class="qty-btn">-</button>
+              <span th:text="${item.quantity}" class="quantity">1</span>
+              <button type="submit" name="quantity" th:value="${item.quantity + 1}" class="qty-btn">+</button>
+            </form>
+          </div>
+          <div class="item-total">
+            <p th:text="${item.totalPrice} + ' руб.'">Итого</p>
+          </div>
+          <div class="remove-item">
+            <form th:action="@{/cart/remove}" method="post">
+              <input type="hidden" name="productId" th:value="${item.productId}">
+              <button type="submit" class="remove-btn">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Итоговая стоимость -->
+      <div class="cart-total">
+        <h3>Итого: <span th:text="${totalAmount}">0</span> руб.</h3>
+      </div>
+
+      <!-- Форма оформления заказа -->
+      <div class="checkout-form">
+        <h2>Оформление заказа</h2>
+        <form th:action="@{/cart/checkout}" method="post">
+          <div class="form-group">
+            <label for="address">Адрес доставки:</label>
+            <input type="text" id="address" name="address" required
+                   placeholder="Введите адрес доставки">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="entrance">Подъезд:</label>
+              <input type="text" id="entrance" name="entrance"
+                     placeholder="Номер подъезда">
+            </div>
+            <div class="form-group">
+              <label for="floor">Этаж:</label>
+              <input type="text" id="floor" name="floor"
+                     placeholder="Этаж">
+            </div>
+            <div class="form-group">
+              <label for="flat">Квартира:</label>
+              <input type="text" id="flat" name="flat"
+                     placeholder="Номер квартиры">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="comment">Комментарий к заказу:</label>
+            <textarea id="comment" name="comment"
+                      placeholder="Дополнительные пожелания"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Способ оплаты:</label>
+            <div class="payment-methods">
+              <label>
+                <input type="radio" name="paymentMethod" value="card" checked>
+                Картой онлайн
+              </label>
+              <label>
+                <input type="radio" name="paymentMethod" value="cash">
+                Наличными при получении
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="checkout-btn">Перейти к оплате</button>
+            <a href="/pizzas" class="continue-shopping">Продолжить покупки</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  Доставка по всей Перми.<br>
+  &copy; dmkcompany 2025<br>
+  <a href="mailto:danichPerm2016@mail.ru">danichPerm2016@mail.ru</a>
+</footer>
+</body>
+</html>

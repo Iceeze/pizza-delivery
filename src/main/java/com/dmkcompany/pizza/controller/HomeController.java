@@ -1,22 +1,28 @@
 package com.dmkcompany.pizza.controller;
 
+import com.dmkcompany.pizza.model.Cart;
+import com.dmkcompany.pizza.service.CartService;
 import com.dmkcompany.pizza.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 
     private final ProductService productService;
+    private final CartService cartService;
 
-    public HomeController(ProductService productService) {
-        this.productService = productService;
+    @ModelAttribute("cart")
+    public Cart getCart() {
+        return cartService.getCart();
     }
 
     @GetMapping("/")
     public String home(Model model) {
-        // Передаем первые 2 пиццы для главной страницы
         var featuredPizzas = productService.getProductsByCategory(1L).subList(0, 2);
         model.addAttribute("featuredPizzas", featuredPizzas);
         return "index";

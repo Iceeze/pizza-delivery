@@ -44,15 +44,26 @@
     </div>
 
     <!-- Блок с популярными пиццами -->
-    <div th:if="${featuredPizzas}" class="featured-pizzas">
-        <h2>Популярные пиццы</h2>
+    <div th:if="${not featuredPizzas.empty}" class="featured-pizzas">
+        <h2>Хиты продаж</h2>
         <div th:each="pizza : ${featuredPizzas}" class="card">
             <img th:src="${pizza.imageUrl}" th:alt="${pizza.name}" width="200px">
+
+            <!-- Пометка "Хит продаж" -->
+            <div class="product-badge" th:text="${pizza.badge}">Хит продаж</div>
+
             <h4 th:text="${pizza.name}">Название пиццы</h4>
             <p th:text="${pizza.description}">Описание пиццы</p>
-            <p class="price">Цена: <span th:text="${pizza.basePrice}">0</span> руб.</p>
+            <p class="price">Цена: <span th:text="${pizza.price}">0</span> руб.</p>
             <a th:href="@{/pizzas}" class="order-btn">Заказать</a>
         </div>
+    </div>
+
+    <!-- Сообщение, если нет хитов продаж -->
+    <div th:if="${featuredPizzas.empty}" class="no-bestsellers">
+        <h2>Популярные пиццы</h2>
+        <p>Скоро здесь появятся наши хиты продаж!</p>
+        <a th:href="@{/pizzas}" class="order-btn">Посмотреть все пиццы</a>
     </div>
 
     <hr>

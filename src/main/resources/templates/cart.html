@@ -8,7 +8,7 @@
   <script src="https://kit.fontawesome.com/deaee54991.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+
 <h1>Доставка пиццы в Перми</h1>
 <header>
   <nav class="navbar">
@@ -27,8 +27,51 @@
   </nav>
 </header>
 <main>
+  <body>
   <div class="cart-container">
-    <h1>Корзина покупок</h1>
+    <h1 th:unless="${showOrderSuccess}">Корзина покупок</h1>
+
+    <!-- Блок успешного оформления заказа -->
+    <div th:if="${showOrderSuccess}" class="order-success-container">
+      <div class="order-success-card">
+        <div class="success-icon">🎉</div>
+        <h2>Заказ успешно оформлен!</h2>
+        <div class="order-details">
+          <div class="order-info">
+            <span class="label">Номер заказа:</span>
+            <span class="value" th:text="${orderNumber}">ORD-123456</span>
+          </div>
+          <div class="order-info">
+            <span class="label">Сумма к оплате:</span>
+            <span class="value" th:text="${finalAmount} + ' руб.'">1500 руб.</span>
+          </div>
+          <div class="order-info">
+            <span class="label">Статус:</span>
+            <span class="value status-processing">В обработке</span>
+          </div>
+        </div>
+        <p class="success-message">Спасибо за ваш заказ! Мы уже начали его готовить.</p>
+        <div class="action-buttons">
+          <a href="/pizzas" class="btn btn-primary">Продолжить покупки</a>
+          <a href="/contacts" class="btn btn-outline">Связаться с нами</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Блок ошибки оформления заказа -->
+    <div th:if="${showOrderError}" class="order-error-container">
+      <div class="order-error-card">
+        <div class="error-icon">❌</div>
+        <h2>Ошибка оформления заказа</h2>
+        <div class="error-details">
+          <p th:text="${errorMessage}">Произошла ошибка при оформлении заказа</p>
+        </div>
+        <div class="action-buttons">
+          <a href="/cart" class="btn btn-primary">Вернуться в корзину</a>
+          <a href="/contacts" class="btn btn-outline">Связаться с поддержкой</a>
+        </div>
+      </div>
+    </div>
 
     <div th:if="${cart?.items?.empty}">
       <p>Ваша корзина пуста</p>
@@ -68,8 +111,49 @@
       </div>
 
       <!-- Итоговая стоимость -->
-      <div class="cart-total">
-        <h3>Итого: <span th:text="${totalAmount}">0</span> руб.</h3>
+      <div class="cart-summary-card">
+        <div class="summary-header">
+          <h3>Сумма заказа</h3>
+        </div>
+
+        <div class="summary-body">
+          <!-- Базовая сумма -->
+          <div class="total-row">
+            <span class="label">Сумма товаров:</span>
+            <span class="value" th:text="${totalAmount} + ' руб.'">0 руб.</span>
+          </div>
+
+          <!-- Скидка -->
+          <div th:if="${discount > 0}" class="discount-row">
+            <span class="label">Общая скидка:</span>
+            <span class="value discount-amount text-success" th:text="'-' + ${discount} + ' руб.'">
+        -0 руб.
+      </span>
+          </div>
+
+          <!-- Итоговая сумма -->
+          <div class="total-row final-total">
+            <span class="label">Итого к оплате:</span>
+            <span class="value final-amount" th:text="${finalAmount} + ' руб.'">
+        0 руб.
+      </span>
+          </div>
+
+          <!-- Информация о скидках -->
+          <div class="discount-info">
+            <div class="discount-item" th:classappend="${cart != null and cart.totalItems >= 5} ? 'active' : ''">
+              <span class="discount-badge">5%</span>
+              <span class="discount-text">При заказе от 5 позиций</span>
+              <span th:if="${cart != null and cart.totalItems >= 5}" class="discount-applied">✓ применено</span>
+            </div>
+
+            <div class="discount-item" th:classappend="${totalAmount != null and totalAmount >= 1000} ? 'active' : ''">
+              <span class="discount-badge">10%</span>
+              <span class="discount-text">При заказе от 1000 рублей</span>
+              <span th:if="${totalAmount != null and totalAmount >= 1000}" class="discount-applied">✓ применено</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Форма оформления заказа -->

@@ -380,3 +380,415 @@ footer a{
     text-align: center;
     margin-top: 20px;
 }
+
+/* Контейнеры для сообщений о заказе */
+.order-success-container,
+.order-error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 2rem;
+}
+
+.order-success-card,
+.order-error-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Иконки */
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.error-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.empty-cart-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Заголовки */
+.order-success-card h2,
+.order-error-card h2 {
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+/* Детали заказа */
+.order-details {
+    background: #f7fafc;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.order-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.order-info:last-child {
+    border-bottom: none;
+}
+
+.order-info .label {
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.order-info .value {
+    color: #2d3748;
+    font-weight: 600;
+}
+
+.status-processing {
+    color: #ed8936;
+    font-weight: 600;
+}
+
+/* Сообщения */
+.success-message {
+    color: #48bb78;
+    font-size: 1.1rem;
+    margin: 1.5rem 0;
+}
+
+.error-details {
+    background: #fed7d7;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.error-details p {
+    color: #c53030;
+    margin: 0;
+}
+
+/* Кнопки */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background: #4299e1;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #3182ce;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: #4299e1;
+    border-color: #4299e1;
+}
+
+.btn-outline:hover {
+    background: #4299e1;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Сообщение о пустой корзине */
+.empty-cart-message {
+    padding: 4rem 2rem;
+    color: #718096;
+}
+
+.empty-cart-message h3 {
+    color: #4a5568;
+    margin-bottom: 1rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .order-success-container,
+    .order-error-container {
+        padding: 1rem;
+        min-height: 50vh;
+    }
+
+    .order-success-card,
+    .order-error-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Карточка суммы заказа */
+.cart-summary-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.summary-header {
+  background: #2d3748;
+  color: white;
+  padding: 1.25rem 1.5rem;
+}
+
+.summary-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.summary-body {
+  padding: 1.5rem;
+}
+
+/* Строки с суммами */
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.final-total {
+  border-bottom: 2px solid #4299e1;
+  margin-bottom: 1rem;
+}
+
+.final-total .label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.final-total .value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #4299e1;
+}
+
+.discount-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+}
+
+.discount-row .label {
+  color: #4a5568;
+}
+
+.discount-row .value {
+  font-weight: 600;
+}
+
+/* Информация о скидках */
+.discount-info {
+  margin: 1.5rem 0;
+}
+
+.discount-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.discount-item.active {
+  background: #ebf8ff;
+  border-color: #4299e1;
+  box-shadow: 0 2px 8px rgba(66, 153, 225, 0.2);
+}
+
+.discount-badge {
+  background: #4299e1;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-right: 0.75rem;
+  min-width: 35px;
+  text-align: center;
+}
+
+.discount-item.active .discount-badge {
+  background: #2b6cb0;
+}
+
+.discount-text {
+  flex: 1;
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+.discount-applied {
+  color: #38a169;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* Прогресс бар */
+.progress-section {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #cbd5e0;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+.remaining-amount {
+  color: #e53e3e;
+  font-weight: 600;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4299e1, #63b3ed);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .cart-summary-card {
+    margin-top: 1rem;
+  }
+
+  .summary-body {
+    padding: 1rem;
+  }
+
+  .final-total .value {
+    font-size: 1.25rem;
+  }
+
+  .discount-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .discount-badge {
+    margin-right: 0;
+  }
+}
+
+.product-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff6b6b;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.card {
+    position: relative;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+.product-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff6b6b;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Разные цвета для разных пометок */
+.product-badge:contains('Новинка') {
+    background: #4ecdc4;
+}
+
+.product-badge:contains('Хит продаж') {
+    background: #ff9f43;
+}
+
+.no-bestsellers {
+    text-align: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.no-bestsellers h2 {
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.no-bestsellers p {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}

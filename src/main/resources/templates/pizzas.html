@@ -31,9 +31,14 @@
         <h1>Выберите пиццу</h1>
         <div th:each="pizza : ${pizzas}" class="card">
             <img th:src="${pizza.imageUrl}" th:alt="${pizza.name}" width="200px">
+
+            <div th:if="${pizza.badge}" class="product-badge" th:text="${pizza.badge}">
+                Новинка
+            </div>
+
             <h4 th:text="${pizza.name}">Название пиццы</h4>
             <p th:text="${pizza.description}">Описание пиццы</p>
-            <p class="price">Цена: <span th:text="${pizza.basePrice}">0</span> руб.</p>
+            <p class="price">Цена: <span th:text="${pizza.price}">0</span> руб.</p>
             <form th:action="@{/cart/add}" method="post" style="display: inline;">
                 <input type="hidden" name="productId" th:value="${pizza.id}">
                 <input type="hidden" name="quantity" value="1">

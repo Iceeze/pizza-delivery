@@ -24,17 +24,4 @@ public class CartItemService {
         }
         return null;
     }
-
-    public Double calculateItemTotal(CartItem item) {
-        return item.getTotalPrice();
-    }
-
-    public void validateCartItem(CartItem cartItem) {
-        if (cartItem == null || cartItem.getProductId() == null) {
-            throw new IllegalArgumentException("CartItem и productId не могут быть null");
-        }
-        if (cartItem.getQuantity() == null || cartItem.getQuantity() <= 0) {
-            throw new IllegalArgumentException("Количество должно быть положительным числом");
-        }
-    }
 }

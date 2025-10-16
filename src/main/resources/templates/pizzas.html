@@ -38,11 +38,36 @@
 
             <h4 th:text="${pizza.name}">Название пиццы</h4>
             <p th:text="${pizza.description}">Описание пиццы</p>
-            <p class="price">Цена: <span th:text="${pizza.price}">0</span> руб.</p>
-            <form th:action="@{/cart/add}" method="post" style="display: inline;">
+
+            <!-- Форма для каждой пиццы -->
+            <form th:action="@{/cart/add}" method="post" class="pizza-form" th:data-pizza-id="${pizza.id}">
                 <input type="hidden" name="productId" th:value="${pizza.id}">
                 <input type="hidden" name="quantity" value="1">
-                <button type="submit" class="order-btn">В корзину</button>
+                <input type="hidden" name="size" value="medium">
+
+                <!-- Выбор размера пиццы -->
+                <div class="size-selector">
+                    <label>
+                        <input type="radio" name="size_radio" value="small"
+                               th:data-price="${pizza.price * 0.7}">
+                        Маленькая (25 см)
+                    </label>
+                    <label>
+                        <input type="radio" name="size_radio" value="medium" checked
+                               th:data-price="${pizza.price}">
+                        Средняя (30 см)
+                    </label>
+                    <label>
+                        <input type="radio" name="size_radio" value="large"
+                               th:data-price="${pizza.price * 1.3}">
+                        Большая (35 см)
+                    </label>
+                </div>
+
+                <div class="pizza-actions">
+                    <span class="price" th:text="${pizza.price} + ' руб.'"></span>
+                    <button type="submit" class="order-btn">В корзину</button>
+                </div>
             </form>
         </div>
     </div>
@@ -52,5 +77,36 @@
     &copy; dmkcompany 2025<br>
     <a href="mailto:danichPerm2016@mail.ru">danichPerm2016@mail.ru</a>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Обработчик для радиокнопок размера
+        document.querySelectorAll('.size-selector input[type="radio"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                const form = this.closest('.pizza-form');
+                const priceElement = form.querySelector('.price');
+                const sizeInput = form.querySelector('input[name="size"]');
+                const newPrice = this.getAttribute('data-price');
+
+                // Обновляем цену
+                priceElement.textContent = Math.round(newPrice) + ' руб.';
+
+                // Обновляем скрытое поле с размером
+                sizeInput.value = this.value;
+
+                console.log('Size changed to:', this.value, 'Price:', newPrice);
+            });
+        });
+
+        // Обработчик отправки формы для отладки
+        document.querySelectorAll('.pizza-form').forEach(function(form) {
+            form.addEventListener('submit', function(e) {
+                const productId = this.querySelector('input[name="productId"]').value;
+                const size = this.querySelector('input[name="size"]').value;
+                console.log('Submitting form - Product ID:', productId, 'Size:', size);
+            });
+        });
+    });
+</script>
 </body>
 </html>

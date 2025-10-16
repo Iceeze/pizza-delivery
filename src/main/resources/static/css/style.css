@@ -792,3 +792,20 @@ footer a{
     color: #6c757d;
     margin-bottom: 1.5rem;
 }
+
+.size-selector {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 5px;
+}
+
+.size-selector label {
+    display: block;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.size-selector input[type="radio"] {
+    margin-right: 8px;
+}

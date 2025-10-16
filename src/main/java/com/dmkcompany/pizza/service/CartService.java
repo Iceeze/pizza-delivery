@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import jakarta.annotation.PostConstruct;
-
 import java.util.List;
 
 @Service
@@ -30,12 +29,16 @@ public class CartService {
 
     public void addItem(CartItem cartItem) {
         List<CartItem> items = cart.getItems();
+
+        // Ищем товар с таким же ID И таким же названием
         for (CartItem item : items) {
-            if (item.getProductId().equals(cartItem.getProductId())) {
+            if (item.getProductId().equals(cartItem.getProductId()) &&
+                    item.getProductName().equals(cartItem.getProductName())) {
                 item.setQuantity(item.getQuantity() + cartItem.getQuantity());
                 return;
             }
         }
+
         items.add(cartItem);
     }
 
@@ -55,6 +58,16 @@ public class CartService {
         List<CartItem> items = cart.getItems();
         for (CartItem item : items) {
             if (item.getProductId().equals(productId)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public CartItem getCartItemByProductIdAndName(Long productId, String productName) {
+        List<CartItem> items = cart.getItems();
+        for (CartItem item : items) {
+            if (item.getProductId().equals(productId) && item.getProductName().equals(productName)) {
                 return item;
             }
         }
